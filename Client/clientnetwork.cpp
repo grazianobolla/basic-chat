@@ -24,7 +24,7 @@ void ClientNetwork::ReceivePackets(sf::TcpSocket * socket){
 }
 
 void ClientNetwork::SendPacket(sf::Packet & packet){
-     if(socket.send(packet) != sf::Socket::Done){
+     if(packet.getDataSize() > 0 && socket.send(packet) != sf::Socket::Done){
           logl("Could not send packet");
      }
 }
