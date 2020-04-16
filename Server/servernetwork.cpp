@@ -47,7 +47,7 @@ void ServerNetwork::ManagePackets(){
                sf::Packet packet;
                if(client->receive(packet) == sf::Socket::Disconnected){
                     DisconnectClient(client, iterator);
-                    break;
+                    continue;
                }
 
                if(packet.getDataSize() > 0){
