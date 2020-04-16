@@ -13,14 +13,16 @@ ServerNetwork::ServerNetwork(unsigned short port, bool rawMode = false) : listen
 
 void ServerNetwork::ConnectClients(std::vector<sf::TcpSocket *> * client_array){
      while(true){
-          logl("Listening new connections");
           sf::TcpSocket * new_client = new sf::TcpSocket();
-
           if(listener.accept(*new_client) == sf::Socket::Done){
                new_client->setBlocking(false);
                client_array->push_back(new_client);
                logl("Added client " << new_client->getRemoteAddress() << ":" << new_client->getRemotePort() << " on slot " << client_array->size());
-          }else logl("Could not add the new client");
+          }else{
+               logl("Server listener error, restart the server");
+               break;
+          }
+          logl("Listening new connections");
      }
 }
 
