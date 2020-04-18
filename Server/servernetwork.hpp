@@ -23,7 +23,7 @@ public:
      void ReceiveRawData(sf::TcpSocket *, size_t);
 
      void BroadcastPacket(sf::Packet &, sf::IpAddress, unsigned short);
-     void BroadcastPacket(const char*, sf::IpAddress, unsigned short);
+     void BroadcastRawData(const char*, sf::IpAddress, unsigned short);
 
      void ManagePackets();
      void Run();

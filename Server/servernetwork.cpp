@@ -20,6 +20,7 @@ void ServerNetwork::ConnectClients(std::vector<sf::TcpSocket *> * client_array){
                logl("Added client " << new_client->getRemoteAddress() << ":" << new_client->getRemotePort() << " on slot " << client_array->size());
           }else{
                logl("Server listener error, restart the server");
+               delete(new_client);
                break;
           }
           logl("Listening new connections");
@@ -44,7 +45,7 @@ void ServerNetwork::BroadcastPacket(sf::Packet & packet, sf::IpAddress exclude_a
      }
 }
 
-void ServerNetwork::BroadcastPacket(const char * data, sf::IpAddress exclude_address, unsigned short port){
+void ServerNetwork::BroadcastRawData(const char * data, sf::IpAddress exclude_address, unsigned short port){
      for(size_t iterator = 0; iterator < client_array.size(); iterator++){
           sf::TcpSocket * client = client_array[iterator];
           if(client->getRemoteAddress() != exclude_address || client->getRemotePort() != port){
@@ -60,11 +61,9 @@ void ServerNetwork::ReceiveRawData(sf::TcpSocket * client, size_t iterator){
      memset(received_data, 0, sizeof(received_data));
      if(client->receive(received_data, sizeof(received_data), received_bytes) == sf::Socket::Disconnected){
           DisconnectClient(client, iterator);
-     }else{
-          if(received_bytes > 0){
-               BroadcastPacket(received_data, client->getRemoteAddress(), client->getRemotePort());
+     }else if(received_bytes > 0){
+               BroadcastRawData(received_data, client->getRemoteAddress(), client->getRemotePort());
                logl(client->getRemoteAddress().toString() << ":" << client->getRemotePort() << " '" << received_data << "'");
-          }
      }
 }
 
