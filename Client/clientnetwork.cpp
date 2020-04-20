@@ -20,6 +20,8 @@ void ClientNetwork::ReceivePackets(sf::TcpSocket * socket){
                last_packet >> received_string >> sender_address >> sender_port;
                logl("From (" << sender_address << ":" << sender_port << "): " << received_string);
           }
+          
+          std::this_thread::sleep_for((std::chrono::milliseconds)100);
      }
 }
 

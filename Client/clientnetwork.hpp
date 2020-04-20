@@ -1,6 +1,7 @@
 #pragma once
 #include <iostream>
 #include <thread>
+#include <chrono>
 #include <SFML/Network.hpp>
 
 #define logl(x) std::cout << x << std::endl
