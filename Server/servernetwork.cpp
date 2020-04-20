@@ -23,7 +23,6 @@ void ServerNetwork::ConnectClients(std::vector<sf::TcpSocket *> * client_array){
                delete(new_client);
                break;
           }
-          logl("Listening new connections");
      }
 }
 
