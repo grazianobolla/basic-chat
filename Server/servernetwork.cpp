@@ -57,7 +57,7 @@ void ServerNetwork::BroadcastRawData(const char * data, sf::IpAddress exclude_ad
 }
 
 void ServerNetwork::ReceiveRawData(sf::TcpSocket * client, size_t iterator){
-     char received_data[256]; size_t received_bytes;
+     char received_data[MAX_RAW_DATA]; size_t received_bytes;
      memset(received_data, 0, sizeof(received_data));
      if(client->receive(received_data, sizeof(received_data), received_bytes) == sf::Socket::Disconnected){
           DisconnectClient(client, iterator);
