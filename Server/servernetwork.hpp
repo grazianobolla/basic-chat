@@ -6,6 +6,8 @@
 #include <string.h>
 #include <SFML/Network.hpp>
 
+#define MAX_RAW_DATA 256 //Max bytes supported on Raw Data mode
+
 #define logl(x) std::cout << x << std::endl
 #define log(x) std::cout << x
 
