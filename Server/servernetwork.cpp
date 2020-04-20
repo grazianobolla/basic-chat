@@ -91,6 +91,8 @@ void ServerNetwork::ManagePackets(){
                if(rawMode == true) ReceiveRawData(client_array[iterator], iterator);
                else ReceivePacket(client_array[iterator], iterator);
           }
+          
+          std::this_thread::sleep_for((std::chrono::milliseconds)100);
      }
 }
 
