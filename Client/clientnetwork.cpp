@@ -31,7 +31,7 @@ void ClientNetwork::ReceivePackets(sf::TcpSocket *socket)
                logl("From (" << sender_address << ":" << sender_port << "): " << received_string);
           }
 
-          std::this_thread::sleep_for((std::chrono::milliseconds)1000);
+          std::this_thread::sleep_for((std::chrono::milliseconds)250);
      }
 }
 
@@ -53,6 +53,9 @@ void ClientNetwork::Run()
           {
                std::string user_input;
                std::getline(std::cin, user_input);
+
+               if (user_input.length() < 1)
+                    continue;
 
                sf::Packet reply_packet;
                reply_packet << user_input;
